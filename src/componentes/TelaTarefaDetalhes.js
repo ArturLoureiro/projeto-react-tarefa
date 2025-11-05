@@ -1,10 +1,27 @@
 import { useLocation, useNavigate } from "react-router-dom"
 import "./css/Tarefa.css"
 import { useState } from "react"
+import useTarefa from "../hooks/useTarefa"
 
 const TelaTarefaDetalhes = () => {
 
+const {alterar_tarefa} = useTarefa()
+
+const handle_buttonClick_alterar = () => {
+
+const tarefa_editada = {
+...tarefa,
+titulo: input_tituloTarefa,
+finalizada: radio_finalizada
+}
+
+alterar_tarefa(tarefa_editada)
+
+navigate("/")
+}
+
 const location = useLocation()
+
 const tarefa = location.state || {}
 
 const navigate = useNavigate()
@@ -71,7 +88,12 @@ setRadio_finalizada(JSON.parse(campo.target.value))
 </h2>
 </div>
 
-<button onClick={() => {alert("Em breve função para alterar a tarefa")}}>
+<button onClick={() => {
+
+handle_buttonClick_alterar()
+
+}}>
+
 Alterar
 </button>
 
